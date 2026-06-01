@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="dashboard-page">
+    <div class="dashboard-header">
+        <div>
+            <h1>Dashboard</h1>
+            <p>Welcome, {{ session["username"] }}. Here is your IT lab overview.</p>
+        </div>
+
+        <a class="action-link" href="/devices">Manage devices</a>
+    </div>
+
+    <div class="dashboard-stats">
+        <div class="dashboard-card">
+            <h2>{{ total_devices }}</h2>
+            <p>Total devices</p>
+        </div>
+
+        <div class="dashboard-card">
+            <h2>{{ total_servers }}</h2>
+            <p>Servers</p>
+        </div>
+
+        <div class="dashboard-card">
+            <h2>{{ total_clients }}</h2>
+            <p>Clients</p>
+        </div>
+
+        <div class="dashboard-card">
+            <h2>{{ open_tickets }}</h2>
+            <p>Open tickets</p>
+        </div>
+    </div>
+
+    <div class="dashboard-info">
+        <h3>IT Lab Manager</h3>
+        <p>
+            This dashboard gives you a quick overview of your documented devices,
+            servers, clients and open troubleshooting tickets.
+        </p>
+    </div>
+</div>
+{% endblock %}

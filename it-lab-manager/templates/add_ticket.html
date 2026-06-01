@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="form-page">
+    <div class="form-header">
+        <div>
+            <h1>Add Troubleshooting Ticket</h1>
+            <p>Create a ticket for DNS, DHCP, NAT or connectivity problems.</p>
+        </div>
+
+        <a class="action-link" href="/tickets">Back to tickets</a>
+    </div>
+
+    <div class="form-card">
+        <form method="post">
+            <label for="device_id">Device</label>
+            <select id="device_id" name="device_id">
+                {% for device in devices %}
+                    <option value="{{ device['id'] }}">
+                        {{ device['hostname'] }} - {{ device['ip_address'] }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <label for="title">Problem title</label>
+            <input
+                id="title"
+                name="title"
+                placeholder="Example: DNS not working"
+            >
+
+            <label for="description">Description</label>
+            <textarea
+                id="description"
+                name="description"
+                placeholder="Describe the problem"
+            ></textarea>
+
+            <label for="status">Status</label>
+            <select id="status" name="status">
+                <option value="open">open</option>
+                <option value="in progress">in progress</option>
+                <option value="solved">solved</option>
+            </select>
+
+            <label for="solution">Solution</label>
+            <textarea
+                id="solution"
+                name="solution"
+                placeholder="Solution, if known"
+            ></textarea>
+
+            <button type="submit">Save ticket</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

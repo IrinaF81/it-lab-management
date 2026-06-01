@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<section class="home-hero">
+    <div class="home-hero-content">
+        <p class="hero-label">CS50 Final Project</p>
+
+        <h1>IT Lab Manager</h1>
+
+        <p class="hero-description">
+            A web-based application for documenting IT lab devices,
+            IP addresses, server roles and troubleshooting tickets.
+        </p>
+
+        <div class="hero-buttons">
+            {% if session.get("user_id") %}
+                <a class="btn-primary" href="/dashboard">Open Dashboard</a>
+                <a class="btn-secondary" href="/devices">View Devices</a>
+            {% else %}
+                <a class="btn-primary" href="/register">Get Started</a>
+                <a class="btn-secondary" href="/login">Login</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<section class="home-cards">
+    {% if session.get("user_id") %}
+        <a class="home-card" href="/devices">
+            <div class="card-icon">🖥️</div>
+            <h3>Device Management</h3>
+            <p>
+                Add servers, clients, routers and switches with hostname,
+                IP address, operating system and role.
+            </p>
+        </a>
+
+        <a class="home-card" href="/devices/add">
+            <div class="card-icon">🌐</div>
+            <h3>Network Documentation</h3>
+            <p>
+                Keep track of subnet masks, gateways, DNS servers and
+                important notes for your lab environment.
+            </p>
+        </a>
+
+        <a class="home-card" href="/tickets">
+            <div class="card-icon">🛠️</div>
+            <h3>Troubleshooting Tickets</h3>
+            <p>
+                Document problems like DNS failures, DHCP issues,
+                NAT errors or failed connectivity tests.
+            </p>
+        </a>
+    {% else %}
+        <a class="home-card" href="/login">
+            <div class="card-icon">🖥️</div>
+            <h3>Device Management</h3>
+            <p>
+                Add servers, clients, routers and switches with hostname,
+                IP address, operating system and role.
+            </p>
+        </a>
+
+        <a class="home-card" href="/login">
+            <div class="card-icon">🌐</div>
+            <h3>Network Documentation</h3>
+            <p>
+                Keep track of subnet masks, gateways, DNS servers and
+                important notes for your lab environment.
+            </p>
+        </a>
+
+        <a class="home-card" href="/login">
+            <div class="card-icon">🛠️</div>
+            <h3>Troubleshooting Tickets</h3>
+            <p>
+                Document problems like DNS failures, DHCP issues,
+                NAT errors or failed connectivity tests.
+            </p>
+        </a>
+    {% endif %}
+</section>
+{% endblock %}

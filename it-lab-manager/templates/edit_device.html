@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="form-page">
+    <div class="form-header">
+        <div>
+            <h1>Edit Device</h1>
+            <p>Update the technical information for this device.</p>
+        </div>
+
+        <a class="action-link" href="/devices">Back to devices</a>
+    </div>
+
+    <div class="form-card">
+        <form method="post" onsubmit="return validateDeviceForm()">
+            <label for="hostname">Hostname</label>
+            <input
+                id="hostname"
+                name="hostname"
+                value="{{ device['hostname'] }}"
+                placeholder="Example: DC01"
+            >
+
+            <label for="device_type">Device type</label>
+            <select id="device_type" name="device_type">
+                <option value="Server" {% if device['device_type'] == 'Server' %}selected{% endif %}>Server</option>
+                <option value="Client" {% if device['device_type'] == 'Client' %}selected{% endif %}>Client</option>
+                <option value="Router" {% if device['device_type'] == 'Router' %}selected{% endif %}>Router</option>
+                <option value="Switch" {% if device['device_type'] == 'Switch' %}selected{% endif %}>Switch</option>
+            </select>
+
+            <label for="ip_address">IP address</label>
+            <input
+                id="ip_address"
+                name="ip_address"
+                value="{{ device['ip_address'] }}"
+                placeholder="Example: 10.1.1.10"
+            >
+
+            <label for="subnet_mask">Subnet mask</label>
+            <input
+                id="subnet_mask"
+                name="subnet_mask"
+                value="{{ device['subnet_mask'] }}"
+                placeholder="Example: 255.255.255.0"
+            >
+
+            <label for="gateway">Gateway</label>
+            <input
+                id="gateway"
+                name="gateway"
+                value="{{ device['gateway'] }}"
+                placeholder="Example: 10.1.1.1"
+            >
+
+            <label for="dns_server">DNS server</label>
+            <input
+                id="dns_server"
+                name="dns_server"
+                value="{{ device['dns_server'] }}"
+                placeholder="Example: 10.1.1.10"
+            >
+
+            <label for="operating_system">Operating system</label>
+            <input
+                id="operating_system"
+                name="operating_system"
+                value="{{ device['operating_system'] }}"
+                placeholder="Example: Windows Server"
+            >
+
+            <label for="role">Role</label>
+            <input
+                id="role"
+                name="role"
+                value="{{ device['role'] }}"
+                placeholder="Example: AD DS, DNS, DHCP"
+            >
+
+            <label for="location">Location</label>
+            <input
+                id="location"
+                name="location"
+                value="{{ device['location'] }}"
+                placeholder="Example: Server room"
+            >
+
+            <label for="notes">Notes</label>
+            <textarea
+                id="notes"
+                name="notes"
+                placeholder="Additional notes about this device"
+            >{{ device['notes'] }}</textarea>
+
+            <button type="submit">Save changes</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

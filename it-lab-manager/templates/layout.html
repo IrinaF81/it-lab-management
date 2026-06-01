@@ -1,0 +1,41 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IT Lab Manager</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=500">
+</head>
+<body>
+
+    <nav>
+        <a href="/">Home</a>
+
+      {% if session.get("user_id") %}
+    <a href="/dashboard">Dashboard</a>
+    <a href="/devices">Devices</a>
+    <a href="/tickets">Tickets</a>
+    <a href="/logout">Logout</a>
+{% else %}
+            <a href="/register">Register</a>
+            <a href="/login">Login</a>
+        {% endif %}
+    </nav>
+
+    <main>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block main %}{% endblock %}
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

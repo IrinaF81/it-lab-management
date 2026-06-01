@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="devices-page">
+    <div class="devices-header">
+        <div>
+            <h1>Devices</h1>
+            <p>Manage servers, clients, routers and switches in your IT lab.</p>
+        </div>
+
+        <a class="action-link" href="/devices/add">Add new device</a>
+    </div>
+
+    <input
+        id="deviceSearch"
+        class="search-input"
+        onkeyup="filterDevices()"
+        placeholder="Search by hostname, type, IP address or role..."
+    >
+
+    <div class="table-card">
+        <table id="devicesTable">
+            <tr>
+                <th>No.</th>
+                <th>Hostname</th>
+                <th>Type</th>
+                <th>IP Address</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+
+            {% for device in devices %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ device["hostname"] }}</td>
+                <td>{{ device["device_type"] }}</td>
+                <td>{{ device["ip_address"] }}</td>
+                <td>{{ device["role"] }}</td>
+                <td>
+                    <a href="/devices/{{ device['id'] }}/edit">Edit</a>
+
+                    <form
+                        class="delete-form"
+                        action="/devices/{{ device['id'] }}/delete"
+                        method="post"
+                        onsubmit="return confirmDelete()"
+                    >
+                        <button class="delete-button" type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}

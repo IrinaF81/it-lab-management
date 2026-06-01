@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="form-page">
+    <div class="form-header">
+        <div>
+            <h1>Edit Ticket</h1>
+            <p>Update the troubleshooting status and solution.</p>
+        </div>
+
+        <a class="action-link" href="/tickets">Back to tickets</a>
+    </div>
+
+    <div class="form-card">
+        <form method="post">
+            <label for="device_id">Device</label>
+            <select id="device_id" name="device_id">
+                {% for device in devices %}
+                    <option
+                        value="{{ device['id'] }}"
+                        {% if device['id'] == ticket['device_id'] %}selected{% endif %}
+                    >
+                        {{ device['hostname'] }} - {{ device['ip_address'] }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <label for="title">Problem title</label>
+            <input
+                id="title"
+                name="title"
+                value="{{ ticket['title'] }}"
+                placeholder="Example: DNS lookup fails"
+            >
+
+            <label for="description">Description</label>
+            <textarea
+                id="description"
+                name="description"
+                placeholder="Describe the problem"
+            >{{ ticket['description'] }}</textarea>
+
+            <label for="status">Status</label>
+            <select id="status" name="status">
+                <option value="open" {% if ticket['status'] == 'open' %}selected{% endif %}>open</option>
+                <option value="in progress" {% if ticket['status'] == 'in progress' %}selected{% endif %}>in progress</option>
+                <option value="solved" {% if ticket['status'] == 'solved' %}selected{% endif %}>solved</option>
+            </select>
+
+            <label for="solution">Solution</label>
+            <textarea
+                id="solution"
+                name="solution"
+                placeholder="Solution, if known"
+            >{{ ticket['solution'] }}</textarea>
+
+            <button type="submit">Save changes</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

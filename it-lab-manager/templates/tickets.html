@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="tickets-page">
+    <div class="tickets-header">
+        <div>
+            <h1>Troubleshooting Tickets</h1>
+            <p>Track DNS, DHCP, NAT and connectivity problems in your IT lab.</p>
+        </div>
+
+        <a class="action-link" href="/tickets/add">Add new ticket</a>
+    </div>
+
+    <div class="table-card">
+        <table id="ticketsTable">
+            <tr>
+                <th>No.</th>
+                <th>Device</th>
+                <th>Problem</th>
+                <th>Status</th>
+                <th>Solution</th>
+                <th>Created</th>
+                <th>Actions</th>
+            </tr>
+
+            {% for ticket in tickets %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ ticket["hostname"] }}</td>
+                <td>{{ ticket["title"] }}</td>
+                <td>{{ ticket["status"] }}</td>
+                <td>{{ ticket["solution"] }}</td>
+                <td>{{ ticket["created_at"] }}</td>
+                <td>
+                    <a href="/tickets/{{ ticket['id'] }}/edit">Edit</a>
+
+                    <form
+                        class="delete-form"
+                        action="/tickets/{{ ticket['id'] }}/delete"
+                        method="post"
+                        onsubmit="return confirmDelete()"
+                    >
+                        <button class="delete-button" type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}
